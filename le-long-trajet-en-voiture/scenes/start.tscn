@@ -1,0 +1,217 @@
+[gd_scene load_steps=23 format=3 uid="uid://yxl47raevwjf"]
+
+[ext_resource type="Script" uid="uid://ccjlshqr67krs" path="res://start.gd" id="1_8itgj"]
+[ext_resource type="PackedScene" uid="uid://cywngdy61mdvn" path="res://scenes/loopable_background.tscn" id="2_tn317"]
+[ext_resource type="PackedScene" uid="uid://dftfdc0b85igh" path="res://scenes/loopable_ground.tscn" id="3_m8nf6"]
+[ext_resource type="Texture2D" uid="uid://c55qiv5jnow5q" path="res://assets/player/main_sprite-sheet.png" id="4_pgjjs"]
+[ext_resource type="Texture2D" uid="uid://bf4o5rabv8a4g" path="res://assets/car/car_background.png" id="5_1nvso"]
+[ext_resource type="Texture2D" uid="uid://d4ihhosb0isdp" path="res://assets/car/character/char2.png" id="6_gsp51"]
+[ext_resource type="Script" uid="uid://c4wc4mp5eaf60" path="res://scripts/character.gd" id="7_r8uic"]
+[ext_resource type="Texture2D" uid="uid://dbk0cofrlvtwa" path="res://assets/press_00.png" id="8_x1pfr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("4_pgjjs")
+region = Rect2(0, 225, 225, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("4_pgjjs")
+region = Rect2(225, 225, 225, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("4_pgjjs")
+region = Rect2(450, 225, 225, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("4_pgjjs")
+region = Rect2(675, 225, 225, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("4_pgjjs")
+region = Rect2(900, 225, 225, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("4_pgjjs")
+region = Rect2(1125, 225, 225, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vyb7"]
+atlas = ExtResource("4_pgjjs")
+region = Rect2(0, 450, 225, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("4_pgjjs")
+region = Rect2(225, 450, 225, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("4_pgjjs")
+region = Rect2(450, 450, 225, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+atlas = ExtResource("4_pgjjs")
+region = Rect2(675, 450, 225, 225)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n0tym"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 0.21,
+"texture": SubResource("AtlasTexture_3vyb7")
+}, {
+"duration": 0.71,
+"texture": SubResource("AtlasTexture_g2els")
+}, {
+"duration": 3.01,
+"texture": SubResource("AtlasTexture_ur7pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r1p")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_ka6nf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.5882353)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Button:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_o30b1"]
+resource_name = "startfade"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.5882353), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Button:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ws7p0"]
+_data = {
+&"RESET": SubResource("Animation_ka6nf"),
+&"startfade": SubResource("Animation_o30b1")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_8itgj")
+
+[node name="Loopable_Background" parent="." instance=ExtResource("2_tn317")]
+position = Vector2(174, -125)
+scale = Vector2(0.175, 0.175)
+script = null
+
+[node name="Loopable_Ground" parent="." instance=ExtResource("3_m8nf6")]
+position = Vector2(149, -109)
+scale = Vector2(0.15, 0.15)
+script = null
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-53, -84)
+scale = Vector2(0.099745005, 0.1)
+sprite_frames = SubResource("SpriteFrames_n0tym")
+animation = &"idle"
+
+[node name="car" type="Sprite2D" parent="."]
+position = Vector2(2, -86)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_1nvso")
+
+[node name="character" type="Sprite2D" parent="car"]
+position = Vector2(-116, 16.000011)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("6_gsp51")
+script = ExtResource("7_r8uic")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(2, -86)
+zoom = Vector2(4.45, 4.45)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ws7p0")
+}
+
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer"]
+offset_left = -238.0
+offset_top = -231.0
+offset_right = 242.0
+offset_bottom = 49.0
+color = Color(0, 0, 0, 0.5882353)
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="AnimationPlayer"]
+offset_left = -72.0
+offset_top = -19.000002
+offset_right = 536.0
+offset_bottom = 137.0
+scale = Vector2(0.23999938, 0.23999938)
+icon = ExtResource("8_x1pfr")
+metadata/_edit_use_anchors_ = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="AnimationPlayer/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

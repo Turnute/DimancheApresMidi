@@ -1,13 +1,26 @@
 [gd_scene load_steps=23 format=3 uid="uid://ow2dt1hwvi22"]
 
-[ext_resource type="Script" uid="uid://b4o1bogi3aw33" path="res://scenes/startgame.gd" id="1_ka6nf"]
 [ext_resource type="PackedScene" uid="uid://cywngdy61mdvn" path="res://scenes/loopable_background.tscn" id="1_o30b1"]
 [ext_resource type="PackedScene" uid="uid://dftfdc0b85igh" path="res://scenes/loopable_ground.tscn" id="2_ka6nf"]
 [ext_resource type="Texture2D" uid="uid://c55qiv5jnow5q" path="res://assets/player/main_sprite-sheet.png" id="3_o30b1"]
-[ext_resource type="Texture2D" uid="uid://c773uctqtyt0k" path="res://assets/car/car_background.png" id="4_ecdxc"]
+[ext_resource type="Texture2D" uid="uid://bf4o5rabv8a4g" path="res://assets/car/car_background.png" id="4_ecdxc"]
 [ext_resource type="Texture2D" uid="uid://d4ihhosb0isdp" path="res://assets/car/character/char2.png" id="5_qls88"]
 [ext_resource type="Script" uid="uid://c4wc4mp5eaf60" path="res://scripts/character.gd" id="6_pcj7n"]
 [ext_resource type="Texture2D" uid="uid://dbk0cofrlvtwa" path="res://assets/press_00.png" id="7_bdg0b"]
+
+[sub_resource type="GDScript" id="GDScript_o30b1"]
+script/source = "extends Node2D
+
+@onready var animation_player = $AnimationPlayer
+var jeu = preload(\"res://scenes/game.tscn\")
+
+func _on_button_pressed():
+	animation_player.play(\"startfade\")
+
+
+func _on_animation_player_animation_finished():
+	get_tree().change_scene_to_packed(jeu)
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
 atlas = ExtResource("3_o30b1")
@@ -92,6 +105,33 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_ka6nf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.5882353)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Button:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_o30b1"]
 resource_name = "startfade"
 length = 2.5
@@ -120,33 +160,6 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_ka6nf"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0.5882353)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationPlayer/Button:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ws7p0"]
 _data = {
 &"RESET": SubResource("Animation_ka6nf"),
@@ -154,7 +167,7 @@ _data = {
 }
 
 [node name="StartScreen" type="Node2D"]
-script = ExtResource("1_ka6nf")
+script = SubResource("GDScript_o30b1")
 
 [node name="Loopable_Background" parent="." instance=ExtResource("1_o30b1")]
 position = Vector2(174, -125)
@@ -198,14 +211,16 @@ offset_top = -231.0
 offset_right = 242.0
 offset_bottom = 49.0
 color = Color(0, 0, 0, 0.5882353)
+metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="AnimationPlayer"]
 offset_left = -72.0
-offset_top = -21.0
+offset_top = -19.000002
 offset_right = 536.0
-offset_bottom = 135.0
+offset_bottom = 137.0
 scale = Vector2(0.23999938, 0.23999938)
 icon = ExtResource("7_bdg0b")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="AnimationPlayer/Button" to="." method="_on_button_pressed"]

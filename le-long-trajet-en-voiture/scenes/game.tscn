@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dx3gelckvfhuq"]
+[gd_scene load_steps=14 format=3 uid="uid://dx3gelckvfhuq"]
 
 [ext_resource type="Script" uid="uid://c2vehuhv44psj" path="res://scripts/main.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://6q8fxhyt5cab" path="res://scenes/player.tscn" id="1_uwrxv"]
@@ -6,11 +6,12 @@
 [ext_resource type="Script" uid="uid://dyf51d0ivyoqs" path="res://scripts/player.gd" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://dftfdc0b85igh" path="res://scenes/loopable_ground.tscn" id="3_p57ef"]
 [ext_resource type="Script" uid="uid://df6wc2nmc6mib" path="res://scripts/obstacle_spawner.gd" id="4_lbhrr"]
-[ext_resource type="Texture2D" uid="uid://c773uctqtyt0k" path="res://assets/car/car_background.png" id="7_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://bf4o5rabv8a4g" path="res://assets/car/car_background.png" id="7_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://d4ihhosb0isdp" path="res://assets/car/character/char2.png" id="8_gee14"]
-[ext_resource type="Script" path="res://scripts/camera.gd" id="9_0tnpc"]
-[ext_resource type="Script" path="res://scripts/character.gd" id="9_vtaks"]
-[ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="11_kvpfn"]
+[ext_resource type="Script" uid="uid://cysdywg71en8t" path="res://scripts/camera.gd" id="9_0tnpc"]
+[ext_resource type="Script" uid="uid://c4wc4mp5eaf60" path="res://scripts/character.gd" id="9_vtaks"]
+[ext_resource type="Texture2D" uid="uid://ysy3cmqs8igb" path="res://assets/car/vignette.png" id="10_dinhu"]
+[ext_resource type="PackedScene" uid="uid://dckd2sv6d4xk0" path="res://scenes/hud.tscn" id="11_kvpfn"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]
 
@@ -80,6 +81,11 @@ duration = 5.5
 
 [node name="target" type="Node2D" parent="Camera2D"]
 position = Vector2(-3, -21)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Camera2D"]
+position = Vector2(958.00006, 626)
+scale = Vector2(1.0000001, 1)
+texture = ExtResource("10_dinhu")
 
 [connection signal="timeout" from="EventTimer" to="." method="_on_event_timer_timeout"]
 [connection signal="timeout" from="ObstacleSpawner/SpawnTimer" to="ObstacleSpawner" method="_on_spawn_timer_timeout"]

@@ -3,7 +3,7 @@ extends Node2D
 var speed : float
 const START_SPEED : float = 10.0
 const MAX_SPEED : int = 25
-const SWAP_THRESHOLD := 5000
+const SWAP_THRESHOLD := 5000	
 
 var score : float = 0.0
 var _did_swap := false
@@ -40,25 +40,25 @@ var rng := RandomNumberGenerator.new()
 
 func _on_event_timer_timeout() -> void:
 	$EventTimer.wait_time = rng.randf_range(20.0, 40.0)
-	var ev: int = rng.randi_range(0, 5)  # 0..5 inclus
+	var ev: int = rng.randi_range(0, 0)
 	match ev:
 		0:
-			# Event Dispute
-			pass
-		1:
 			# Event Pont
 			pass
-		2:
-			# Event Dos d'Âne
-			pass
-		3:
-			# Obstacle très proche de la voiture
-			pass
-		4:
-			# Autre event ?
-			pass
-		5:
-			# Autre event ?
-			pass
+		#1:
+		#	# Event Dispute
+		#	pass
+		#2:
+		#	# Event Dos d'Âne
+		#	pass
+		#3:
+		#	# Obstacle très proche de la voiture
+		#	pass
+		#4:
+		#	# Autre event ?
+		#	pass
+		#5:
+		#	# Autre event ?
+		#	pass
 		_:
 			pass  # sécurité

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bfiqkbnrj3v2h"]
 
-[ext_resource type="Texture2D" uid="uid://xavqalohecwr" path="res://assets/events/bridge.png" id="1_8kqdj"]
+[ext_resource type="Texture2D" uid="uid://xavqalohecwr" path="res://assets/events/bridge.png" id="1_wyudv"]
 
 [sub_resource type="Animation" id="Animation_bugwq"]
 length = 0.001
@@ -39,7 +39,7 @@ tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(2.9333334, 3.8, 6.5, 7.5),
+"times": PackedFloat32Array(2.9333334, 3.8, 5.5333333, 7.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
@@ -51,10 +51,38 @@ tracks/1/path = NodePath("AnimationPlayer/Sprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 6.46, 7.9),
+"times": PackedFloat32Array(0, 5.5, 7.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(899, -9), Vector2(-242.06833, -9.000001), Vector2(-730, -9)]
+}
+
+[sub_resource type="Animation" id="Animation_8kqdj"]
+resource_name = "debutunnel"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.99),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(899.00006, 4), Vector2(-669.99994, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 7.03),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_v2wp5"]
@@ -105,34 +133,6 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 0.39215687), Color(0, 0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_8kqdj"]
-resource_name = "debutunnel"
-length = 8.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationPlayer/Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 6.99),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(899.00006, 4), Vector2(-669.99994, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationPlayer/ColorRect:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2, 7.03),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_42jx5"]
 _data = {
 &"RESET": SubResource("Animation_bugwq"),
@@ -143,20 +143,23 @@ _data = {
 &"start": SubResource("Animation_f8lsp")
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer"]
+[node name="AnimBridge" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_42jx5")
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer"]
 offset_left = -487.0
 offset_top = -188.0
 offset_right = 164.0
 offset_bottom = 169.0
 scale = Vector2(1.4975882, 1.0400006)
-color = Color(0, 0, 0, 0.1749503)
+color = Color(0, 0, 0, 0.39215687)
+metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-481.45074, 0.48068643)
+[node name="Sprite2D" type="Sprite2D" parent="AnimationPlayer"]
+position = Vector2(899.00006, 4)
 scale = Vector2(0.34814814, 0.34814814)
-texture = ExtResource("1_8kqdj")
+texture = ExtResource("1_wyudv")
