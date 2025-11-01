@@ -11,10 +11,10 @@ var _did_swap := false
 @export var ground_scroll_speed : float
 @export var background_scroll_speed : float
 
-enum events { BRIDGE, ARGUMENT }
-
 func _ready() -> void:
+	rng.randomize()
 	new_game()
+	
 
 func new_game():
 	speed = START_SPEED
@@ -36,11 +36,29 @@ func get_score() -> int:
 
 func get_speed() -> float:
 	return speed
+var rng := RandomNumberGenerator.new()
 
 func _on_event_timer_timeout() -> void:
-	var env : int
-	$EventTimer.wait_time = randf_range(20, 40)
-	#env = (int)randf_range(0, 5)
-	#match env:
-	#	BRIDGE:
-	pass # Replace with function body.
+	$EventTimer.wait_time = rng.randf_range(20.0, 40.0)
+	var ev: int = rng.randi_range(0, 5)  # 0..5 inclus
+	match ev:
+		0:
+			# Event Dispute
+			pass
+		1:
+			# Event Pont
+			pass
+		2:
+			# Event Dos d'Âne
+			pass
+		3:
+			# Obstacle très proche de la voiture
+			pass
+		4:
+			# Autre event ?
+			pass
+		5:
+			# Autre event ?
+			pass
+		_:
+			pass  # sécurité
