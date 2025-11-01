@@ -16,4 +16,4 @@ func timeout():
 	obstacleInstance.position = spawn_pos.position
 	add_child(obstacleInstance)
 	timer.wait_time = randf_range(1.5, 4.5)
-	print(timer.wait_time)
+	#print(timer.wait_time)

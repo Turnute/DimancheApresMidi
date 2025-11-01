@@ -17,9 +17,5 @@ func _on_body_entered(body: Node2D) -> void:
 	print(score)
 	pass # Replace with function body.
 
-
-
 func _on_timer_timeout() -> void:
 	queue_free()
-	print("I despawned! o7")
-	pass # Replace with function body.

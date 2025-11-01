@@ -1,19 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://dx3gelckvfhuq"]
+[gd_scene load_steps=8 format=3 uid="uid://dx3gelckvfhuq"]
 
 [ext_resource type="Script" uid="uid://c2vehuhv44psj" path="res://scripts/main.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://6q8fxhyt5cab" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dyf51d0ivyoqs" path="res://scripts/player.gd" id="2_yqjtg"]
 [ext_resource type="Script" uid="uid://df6wc2nmc6mib" path="res://scripts/obstacle_spawner.gd" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://c5yqvrtevjjv5" path="res://scenes/ground.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://cae78nfqaoj2m" path="res://scenes/background.tscn" id="6_p57ef"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]
 
 [node name="Game" type="Node2D"]
-position = Vector2(1, 0)
 script = ExtResource("1_lbhrr")
+
+[node name="Background" parent="." instance=ExtResource("6_p57ef")]
+position = Vector2(2605, -105)
+scale = Vector2(1, 0.2800004)
+
+[node name="Ground" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(268, 23)
+scale = Vector2(0.15, 0.15)
+collision_layer = 2
+collision_mask = 2
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
 position = Vector2(-100, -7)
-scale = Vector2(1.0025241, 0.99450845)
+scale = Vector2(1.5, 1.488)
 collision_layer = 4
 collision_mask = 10
 script = ExtResource("2_yqjtg")
@@ -23,6 +34,7 @@ position = Vector2(0, -50)
 zoom = Vector2(4, 4)
 
 [node name="LE SOL" type="StaticBody2D" parent="."]
+position = Vector2(0, 5)
 collision_layer = 2
 collision_mask = 10
 
