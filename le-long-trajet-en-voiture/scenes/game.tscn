@@ -8,9 +8,9 @@
 [ext_resource type="Script" uid="uid://df6wc2nmc6mib" path="res://scripts/obstacle_spawner.gd" id="4_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://c773uctqtyt0k" path="res://assets/car/car_background.png" id="7_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://d4ihhosb0isdp" path="res://assets/car/character/char2.png" id="8_gee14"]
-[ext_resource type="Script" uid="uid://cysdywg71en8t" path="res://scripts/camera.gd" id="9_0tnpc"]
-[ext_resource type="Script" uid="uid://c4wc4mp5eaf60" path="res://scripts/character.gd" id="9_vtaks"]
-[ext_resource type="PackedScene" uid="uid://dckd2sv6d4xk0" path="res://scenes/hud.tscn" id="11_kvpfn"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="9_0tnpc"]
+[ext_resource type="Script" path="res://scripts/character.gd" id="9_vtaks"]
+[ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="11_kvpfn"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]
 
