@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dftfdc0b85igh"]
+
+[ext_resource type="Script" uid="uid://c1es0kkussnpg" path="res://scripts/loopable_ground.gd" id="1_c2rf6"]
+[ext_resource type="Texture2D" uid="uid://ciea3q6ulgoad" path="res://assets/ground/ground.png" id="2_c2rf6"]
+
+[node name="Loopable_Ground" type="Node2D"]
+script = ExtResource("1_c2rf6")
+
+[node name="A" type="Sprite2D" parent="."]
+texture = ExtResource("2_c2rf6")
+
+[node name="B" type="Sprite2D" parent="."]
+position = Vector2(4459, 0)
+scale = Vector2(-1, 1)
+texture = ExtResource("2_c2rf6")

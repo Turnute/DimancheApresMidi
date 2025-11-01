@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cywngdy61mdvn"]
+
+[ext_resource type="Script" uid="uid://fmnjm178ubb2" path="res://scripts/loopable_background.gd" id="1_3ehot"]
+[ext_resource type="Texture2D" uid="uid://bmo8pb1xektm1" path="res://assets/background/background.jpg" id="2_3ehot"]
+
+[node name="Loopable_Background" type="Node2D"]
+script = ExtResource("1_3ehot")
+
+[node name="A" type="Sprite2D" parent="."]
+texture = ExtResource("2_3ehot")
+
+[node name="B" type="Sprite2D" parent="."]
+position = Vector2(4114, 0)
+texture = ExtResource("2_3ehot")

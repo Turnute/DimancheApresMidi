@@ -24,6 +24,7 @@ func new_game():
 	#$Camera2D.position = CAM_START_POS
 	#$"LE SOL".position = Vector2i(0, 0)
 	speed = START_SPEED
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

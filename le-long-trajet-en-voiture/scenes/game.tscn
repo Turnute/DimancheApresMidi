@@ -1,40 +1,38 @@
-[gd_scene load_steps=8 format=3 uid="uid://dx3gelckvfhuq"]
+[gd_scene load_steps=10 format=3 uid="uid://dx3gelckvfhuq"]
 
 [ext_resource type="Script" uid="uid://c2vehuhv44psj" path="res://scripts/main.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://6q8fxhyt5cab" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://cywngdy61mdvn" path="res://scenes/loopable_background.tscn" id="2_p57ef"]
 [ext_resource type="Script" uid="uid://dyf51d0ivyoqs" path="res://scripts/player.gd" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://dftfdc0b85igh" path="res://scenes/loopable_ground.tscn" id="3_p57ef"]
 [ext_resource type="Script" uid="uid://df6wc2nmc6mib" path="res://scripts/obstacle_spawner.gd" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://c5yqvrtevjjv5" path="res://scenes/ground.tscn" id="5_iywne"]
-[ext_resource type="PackedScene" uid="uid://cae78nfqaoj2m" path="res://scenes/background.tscn" id="6_p57ef"]
+[ext_resource type="Texture2D" uid="uid://c773uctqtyt0k" path="res://assets/car/car_background.png" id="7_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://d4ihhosb0isdp" path="res://assets/car/character/char2.png" id="8_gee14"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lbhrr")
 
-[node name="Background" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(2605, -105)
-scale = Vector2(1, 0.2800004)
+[node name="Loopable_Background" parent="." instance=ExtResource("2_p57ef")]
+position = Vector2(174, -125)
+scale = Vector2(0.175, 0.175)
+speed_ref = NodePath("..")
 
-[node name="Ground" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(268, 23)
+[node name="Loopable_Ground" parent="." instance=ExtResource("3_p57ef")]
+position = Vector2(149, -109)
 scale = Vector2(0.15, 0.15)
-collision_layer = 2
-collision_mask = 2
+speed_ref = NodePath("..")
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
-position = Vector2(-100, -7)
-scale = Vector2(1.5, 1.488)
+position = Vector2(-20, -78.99999)
+scale = Vector2(1, 0.992)
 collision_layer = 4
 collision_mask = 10
 script = ExtResource("2_yqjtg")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -50)
-zoom = Vector2(4, 4)
-
 [node name="LE SOL" type="StaticBody2D" parent="."]
-position = Vector2(0, 5)
+position = Vector2(10, -67)
 collision_layer = 2
 collision_mask = 10
 
@@ -42,6 +40,7 @@ collision_mask = 10
 shape = SubResource("WorldBoundaryShape2D_yqjtg")
 
 [node name="ObstacleSpawner" type="Node2D" parent="."]
+position = Vector2(10, -72)
 script = ExtResource("4_lbhrr")
 
 [node name="SpawnTimer" type="Timer" parent="ObstacleSpawner"]
@@ -49,3 +48,17 @@ wait_time = 2.0
 
 [node name="SpawnLocation" type="Node2D" parent="ObstacleSpawner"]
 position = Vector2(166, -8)
+
+[node name="car" type="Sprite2D" parent="."]
+position = Vector2(2, -86)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("7_u5sy4")
+
+[node name="Sprite2D" type="Sprite2D" parent="car"]
+position = Vector2(-160, 12.000011)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("8_gee14")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(2, -86)
+zoom = Vector2(4.45, 4.45)
