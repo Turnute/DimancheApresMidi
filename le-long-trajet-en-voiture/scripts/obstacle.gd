@@ -1,17 +1,25 @@
 extends Area2D
-@export var speed = 0.3
+var speed
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("hellooooo")
-
+	speed = get_parent().get_parent().get_speed()
+	#pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position.x -= speed
+	position.x -= speed / 10
 	#pass
 
-
 func _on_body_entered(body: Node2D) -> void:
-	print("Ouch!")
+	queue_free()
+	var score : int = get_parent().get_parent().get_score()
+	print(score)
+	pass # Replace with function body.
+
+
+
+func _on_timer_timeout() -> void:
+	queue_free()
+	print("I despawned! o7")
 	pass # Replace with function body.

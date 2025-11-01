@@ -9,7 +9,7 @@ size = Vector2(16.01747, 15.9188795)
 [node name="Obstacle" type="Area2D"]
 scale = Vector2(0.9970971, 1.0137055)
 collision_layer = 8
-collision_mask = 4
+collision_mask = 12
 script = ExtResource("1_drdry")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -20,4 +20,9 @@ texture = ExtResource("1_7ukg5")
 scale = Vector2(0.99999976, 1)
 shape = SubResource("RectangleShape2D_drdry")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

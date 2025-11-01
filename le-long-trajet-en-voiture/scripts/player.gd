@@ -23,7 +23,3 @@ func _physics_process(delta: float) -> void:
 		jump_count += 1
 
 	move_and_slide()
-
-
-func _on_obstacle_body_shape_entered(body_rid: RID, body: Node, body_shape_index: int, local_shape_index: int) -> void:
-	print("ouch!")
