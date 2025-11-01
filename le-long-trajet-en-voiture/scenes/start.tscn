@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cywngdy61mdvn" path="res://scenes/loopable_background.tscn" id="2_tn317"]
 [ext_resource type="PackedScene" uid="uid://dftfdc0b85igh" path="res://scenes/loopable_ground.tscn" id="3_m8nf6"]
 [ext_resource type="Texture2D" uid="uid://bf4o5rabv8a4g" path="res://assets/car/car_background.png" id="5_1nvso"]
-[ext_resource type="Texture2D" uid="uid://d4ihhosb0isdp" path="res://assets/car/character/char2.png" id="6_gsp51"]
+[ext_resource type="Texture2D" uid="uid://d4ihhosb0isdp" path="res://assets/car/character/char1.png" id="6_gsp51"]
 [ext_resource type="Script" uid="uid://c4wc4mp5eaf60" path="res://scripts/character.gd" id="7_r8uic"]
 [ext_resource type="Texture2D" uid="uid://dbk0cofrlvtwa" path="res://assets/press_00.png" id="8_x1pfr"]
 
@@ -88,7 +88,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_1nvso")
 
 [node name="character" type="Sprite2D" parent="car"]
-position = Vector2(-116, 16.000011)
+position = Vector2(-128, 16.000011)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("6_gsp51")
 script = ExtResource("7_r8uic")
