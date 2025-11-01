@@ -9,6 +9,7 @@
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_uwrxv")]
 position = Vector2(0, -7)
+scale = Vector2(1.0025241, 0.9855155)
 script = ExtResource("2_yqjtg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
