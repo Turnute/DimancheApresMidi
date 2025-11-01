@@ -9,7 +9,6 @@ func _on_button_pressed():
 	start()
 
 func _on_timer_timeout() -> void:
-	print("bjr :D")
 	get_tree().change_scene_to_packed(jeu)
 
 func _process(delta: float) -> void:

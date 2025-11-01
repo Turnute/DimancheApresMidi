@@ -63,3 +63,24 @@ func _on_event_timer_timeout() -> void:
 		#	pass
 		_:
 			pass  # sécurité
+
+var home = preload("res://scenes/start.tscn")
+
+func _on_end_timer_timeout() -> void:
+	print("coubeh")
+	get_tree().change_scene_to_packed(home)
+
+func game_over() -> void:
+	print("Game Over!")
+	# Lance l'animation de fin
+	$GameOver.play("game_end")
+
+	# Démarre le timer d'outro
+	$GameOver/EndTimer.start()
+
+	# Si ton animation met le jeu en pause, assure-toi que le EndTimer a Pause Mode = Process
+	# await bloque proprement jusqu'au timeout
+	await $GameOver/EndTimer.timeout
+
+	# Change la scène (de façon robuste)
+	get_tree().call_deferred("change_scene_to_packed", home)

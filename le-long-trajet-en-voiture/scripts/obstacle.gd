@@ -15,6 +15,7 @@ func _on_body_entered(body: Node2D) -> void:
 	queue_free()
 	var score : int = get_parent().get_parent().get_score()
 	print(score)
+	get_parent().get_parent().game_over()
 	pass # Replace with function body.
 
 func _on_timer_timeout() -> void:
