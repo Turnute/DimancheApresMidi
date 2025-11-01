@@ -1,38 +1,46 @@
 extends Node2D
 
-# Game variables
-#const PLAYER_START_POS := Vector2i(-100, -7)
-#const CAM_START_POS := Vector2i(0, -50)
-
 var speed : float
 const START_SPEED : float = 10.0
 const MAX_SPEED : int = 25
+const SWAP_THRESHOLD := 5000
 
-var score : int = 0
+var score : float = 0.0
+var _did_swap := false
 
 @export var ground_scroll_speed : float
 @export var background_scroll_speed : float
 
-# Called when the node enters the scene tree for the first time.
+enum events { BRIDGE, ARGUMENT }
+
 func _ready() -> void:
 	new_game()
 
 func new_game():
-	#resets the nodes
-	#$Player.position = PLAYER_START_POS
-	#$Player.velocity = Vector2i(0, 0)
-	#$Camera2D.position = CAM_START_POS
-	#$"LE SOL".position = Vector2i(0, 0)
 	speed = START_SPEED
-	
+	score = 0.0
+	_did_swap = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	score += speed
-	pass
+	score += speed * delta * 10.5  # frame-rate indépendant
+	show_score()
+	if not _did_swap and score >= SWAP_THRESHOLD:
+		$car/character.swap_textures()
+		_did_swap = true
 
-func get_score() -> int :
-	return score
+func show_score() -> void:
+	$Camera2D/HUD.get_node("ScoreLabel").text = "SCORE: " + str(int(score))
 
-func get_speed() -> float :
+func get_score() -> int:
+	return int(score)
+
+func get_speed() -> float:
 	return speed
+
+func _on_event_timer_timeout() -> void:
+	var env : int
+	$EventTimer.wait_time = randf_range(20, 40)
+	#env = (int)randf_range(0, 5)
+	#match env:
+	#	BRIDGE:
+	pass # Replace with function body.
