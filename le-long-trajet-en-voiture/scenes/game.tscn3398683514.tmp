@@ -1,0 +1,134 @@
+[gd_scene load_steps=15 format=3 uid="uid://dx3gelckvfhuq"]
+
+[ext_resource type="Script" uid="uid://c2vehuhv44psj" path="res://scripts/main.gd" id="1_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://6q8fxhyt5cab" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://cywngdy61mdvn" path="res://scenes/loopable_background.tscn" id="2_p57ef"]
+[ext_resource type="Script" uid="uid://dyf51d0ivyoqs" path="res://scripts/player.gd" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://dftfdc0b85igh" path="res://scenes/loopable_ground.tscn" id="3_p57ef"]
+[ext_resource type="Script" uid="uid://df6wc2nmc6mib" path="res://scripts/obstacle_spawner.gd" id="4_lbhrr"]
+[ext_resource type="Texture2D" uid="uid://bf4o5rabv8a4g" path="res://assets/car/car_background.png" id="7_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://d4ihhosb0isdp" path="res://assets/car/character/char1.png" id="8_gee14"]
+[ext_resource type="Script" uid="uid://cysdywg71en8t" path="res://scripts/camera.gd" id="9_0tnpc"]
+[ext_resource type="Script" uid="uid://c4wc4mp5eaf60" path="res://scripts/character.gd" id="9_vtaks"]
+[ext_resource type="PackedScene" uid="uid://dckd2sv6d4xk0" path="res://scenes/hud.tscn" id="11_kvpfn"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]
+
+[sub_resource type="Animation" id="Animation_kvpfn"]
+resource_name = "game_end"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameOver/Over:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.5882353)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameOver/Over:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kvuet"]
+_data = {
+&"game_end": SubResource("Animation_kvpfn")
+}
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_lbhrr")
+
+[node name="EventTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[node name="Loopable_Background" parent="." instance=ExtResource("2_p57ef")]
+position = Vector2(174, -125)
+scale = Vector2(0.175, 0.175)
+speed_ref = NodePath("..")
+
+[node name="Loopable_Ground" parent="." instance=ExtResource("3_p57ef")]
+position = Vector2(149, -109)
+scale = Vector2(0.15, 0.15)
+speed_ref = NodePath("..")
+
+[node name="Player" parent="." instance=ExtResource("1_uwrxv")]
+position = Vector2(-53, -231)
+scale = Vector2(1, 0.992)
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("2_yqjtg")
+
+[node name="LE SOL" type="StaticBody2D" parent="."]
+position = Vector2(10, -67)
+collision_layer = 2
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LE SOL"]
+shape = SubResource("WorldBoundaryShape2D_yqjtg")
+
+[node name="ObstacleSpawner" type="Node2D" parent="."]
+position = Vector2(10, -72)
+script = ExtResource("4_lbhrr")
+
+[node name="SpawnTimer" type="Timer" parent="ObstacleSpawner"]
+wait_time = 2.0
+
+[node name="SpawnLocation" type="Node2D" parent="ObstacleSpawner"]
+position = Vector2(166, -8)
+
+[node name="car" type="Sprite2D" parent="."]
+position = Vector2(2, -86)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("7_u5sy4")
+
+[node name="character" type="Sprite2D" parent="car"]
+position = Vector2(-128, 16)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("8_gee14")
+script = ExtResource("9_vtaks")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(2, -86)
+zoom = Vector2(4.45, 4.45)
+script = ExtResource("9_0tnpc")
+target = NodePath("target")
+start_zoom = Vector2(4.45, 4.45)
+end_zoom = Vector2(5.6, 5.6)
+duration = 5.5
+
+[node name="HUD" parent="Camera2D" instance=ExtResource("11_kvpfn")]
+
+[node name="target" type="Node2D" parent="Camera2D"]
+position = Vector2(-3, -21)
+
+[node name="GameOver" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_kvuet")
+}
+
+[node name="Over" type="ColorRect" parent="GameOver"]
+offset_left = -214.0
+offset_top = -209.0
+offset_right = -174.0
+offset_bottom = -169.0
+scale = Vector2(10.815694, 6.2588105)
+color = Color(0, 0, 0, 0)
+
+[node name="EndTimer" type="Timer" parent="GameOver"]
+
+[connection signal="timeout" from="EventTimer" to="." method="_on_event_timer_timeout"]
+[connection signal="timeout" from="ObstacleSpawner/SpawnTimer" to="ObstacleSpawner" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="GameOver/EndTimer" to="." method="_on_end_timer_timeout"]

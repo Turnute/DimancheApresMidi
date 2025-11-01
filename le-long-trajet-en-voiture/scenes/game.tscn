@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dx3gelckvfhuq"]
+[gd_scene load_steps=15 format=3 uid="uid://dx3gelckvfhuq"]
 
 [ext_resource type="Script" uid="uid://c2vehuhv44psj" path="res://scripts/main.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://6q8fxhyt5cab" path="res://scenes/player.tscn" id="1_uwrxv"]
@@ -42,36 +42,8 @@ tracks/1/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_dinhu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GameOver/Over:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0.5882353)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GameOver/Over:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kvuet"]
 _data = {
-&"RESET": SubResource("Animation_dinhu"),
 &"game_end": SubResource("Animation_kvpfn")
 }
 
@@ -81,6 +53,8 @@ script = ExtResource("1_lbhrr")
 [node name="EventTimer" type="Timer" parent="."]
 wait_time = 30.0
 autostart = true
+
+[node name="EndTimer" type="Timer" parent="."]
 
 [node name="Loopable_Background" parent="." instance=ExtResource("2_p57ef")]
 position = Vector2(174, -125)
@@ -133,9 +107,7 @@ position = Vector2(2, -86)
 zoom = Vector2(4.45, 4.45)
 script = ExtResource("9_0tnpc")
 target = NodePath("target")
-start_zoom = Vector2(4.45, 4.45)
-end_zoom = Vector2(5.6, 5.6)
-duration = 5.5
+duration = 6.0
 
 [node name="HUD" parent="Camera2D" instance=ExtResource("11_kvpfn")]
 
@@ -153,10 +125,8 @@ offset_top = -209.0
 offset_right = -174.0
 offset_bottom = -169.0
 scale = Vector2(10.815694, 6.2588105)
-color = Color(0, 0, 0, 0.5882353)
-
-[node name="EndTimer" type="Timer" parent="GameOver"]
+color = Color(0, 0, 0, 0)
 
 [connection signal="timeout" from="EventTimer" to="." method="_on_event_timer_timeout"]
+[connection signal="timeout" from="EndTimer" to="." method="_on_end_timer_timeout"]
 [connection signal="timeout" from="ObstacleSpawner/SpawnTimer" to="ObstacleSpawner" method="_on_spawn_timer_timeout"]
-[connection signal="timeout" from="GameOver/EndTimer" to="." method="_on_end_timer_timeout"]

@@ -1,6 +1,22 @@
-[gd_scene load_steps=14 format=3 uid="uid://6q8fxhyt5cab"]
+[gd_scene load_steps=18 format=3 uid="uid://6q8fxhyt5cab"]
 
 [ext_resource type="Texture2D" uid="uid://c55qiv5jnow5q" path="res://assets/player/main_sprite-sheet.png" id="1_g2els"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
+atlas = ExtResource("1_g2els")
+region = Rect2(0, 675, 225, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
+atlas = ExtResource("1_g2els")
+region = Rect2(225, 675, 225, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
+atlas = ExtResource("1_g2els")
+region = Rect2(675, 675, 225, 225)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
+atlas = ExtResource("1_g2els")
+region = Rect2(450, 675, 225, 225)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
 atlas = ExtResource("1_g2els")
@@ -44,6 +60,23 @@ region = Rect2(675, 450, 225, 225)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fulsm"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v2ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jej6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1ej7")
+}],
+"loop": false,
+"name": &"death",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qhqgy")
@@ -94,9 +127,10 @@ radius = 5.0
 position = Vector2(0, -5)
 scale = Vector2(0.099745005, 0.1)
 sprite_frames = SubResource("SpriteFrames_fulsm")
-animation = &"jump"
+animation = &"death"
 autoplay = "idle"
-frame_progress = 0.15743022
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)

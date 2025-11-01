@@ -1,24 +1,66 @@
 extends Camera2D
 
-@export var target: NodePath          # Le Node (Player, etc.) vers lequel on zoome
-@export var start_zoom: Vector2 = Vector2(2.0, 2.0)   # Zoom de départ (plus grand = plus loin)
-@export var end_zoom:   Vector2 = Vector2(1.0, 1.0)   # Zoom d'arrivée (1,1 = normal)
-@export var duration: float = 1.2                     # Durée de l’animation (en secondes)
-@export var move_to_target: bool = true               # Glisser la caméra vers la cible pendant le zoom ?
+@export var target: NodePath
+@export var start_zoom: Vector2 = Vector2(4.45, 4.45)
+@export var end_zoom:   Vector2 = Vector2(5.6, 5.6)
+@export var duration: float = 5.5
+@export var move_to_target: bool = true
+
+var _init_pos: Vector2
+var _init_zoom: Vector2
+var _tw: Tween
+
+var _rng := RandomNumberGenerator.new()
+var _shake_time := 0.0
+var _shake_duration := 0.0
+var _shake_amp := 0.0           # en pixels
+var _shake_original_offset := Vector2.ZERO
 
 func _ready() -> void:
-	zoom = start_zoom              # On part du zoom de départ
+	_rng.randomize()
+	_init_pos = global_position
+	_init_zoom = start_zoom
+	zoom = start_zoom
+	_shake_original_offset = offset
+	zoom_to_target()  # si tu veux auto-zoom au start
 
-	var tw := create_tween()
-	tw.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+func _process(delta: float) -> void:
+	if _shake_time < _shake_duration:
+		_shake_time += delta
+		var t := 1.0 - (_shake_time / _shake_duration)
+		var a := _shake_amp * t * t         # damping (ease-out quad)
+		offset = _shake_original_offset + Vector2(
+			_rng.randf_range(-a, a),
+			_rng.randf_range(-a, a)
+		)
+	else:
+		offset = _shake_original_offset
 
-	# Anime le zoom vers la valeur finale
-	tw.parallel().tween_property(self, "zoom", end_zoom, duration)
+func _make_tween(dur: float) -> Tween:
+	if is_instance_valid(_tw):
+		_tw.kill()
+	_tw = create_tween()
+	_tw.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	_tw.set_parallel(true)
+	return _tw
 
-	# Optionnel : déplace la caméra pour se centrer sur la cible en même temps
-	if move_to_target and target != NodePath(""):
-		var n := get_node_or_null(target)
-		if n is Node2D:
-			tw.parallel().tween_property(self, "global_position", (n as Node2D).global_position, duration)
+func zoom_to_node(n: Node2D, dur: float = duration) -> void:
+	var tw := _make_tween(dur)
+	tw.tween_property(self, "zoom", end_zoom, dur)
+	if move_to_target:
+		tw.tween_property(self, "global_position", n.global_position, dur)
 
-# TODO: ZOOM PLUS LENT A L'ARRET !!!
+func zoom_to_target(dur: float = duration) -> void:
+	var n := get_node_or_null(target)
+	if n is Node2D:
+		zoom_to_node(n as Node2D, dur)
+
+func reset_camera(dur: float = duration) -> void:
+	var tw := _make_tween(dur)
+	tw.tween_property(self, "zoom", _init_zoom, dur)
+	tw.tween_property(self, "global_position", _init_pos, dur)
+
+func screen_shake(intensity: int, duration: float = 0.25) -> void:
+	_shake_amp = float(intensity)     # pixels max
+	_shake_duration = duration
+	_shake_time = 0.0
