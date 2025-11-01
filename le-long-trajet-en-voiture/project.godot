@@ -33,6 +33,14 @@ pause={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Fond"
+2d_physics/layer_2="Parcours"
+2d_physics/layer_3="Joueur"
+2d_physics/layer_4="Obstacle"
+2d_physics/layer_5="Voiture"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
