@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 @onready var animated_sprite = $AnimatedSprite2D
 @export var JUMP_VELOCITY = -300
 #the jump count
@@ -18,6 +17,8 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and jump_count < max_jumps:
 		jump(JUMP_VELOCITY)
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit()
 
 	move_and_slide()
 
