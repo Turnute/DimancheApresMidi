@@ -36,6 +36,7 @@ func get_score() -> int:
 
 func get_speed() -> float:
 	return speed
+
 var rng := RandomNumberGenerator.new()
 
 func _on_event_timer_timeout() -> void:
