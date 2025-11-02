@@ -18,6 +18,7 @@ var _did_swap := false
 @onready var _end_timer: Timer = $EndTimer
 @onready var _character := get_node_or_null("car/character")
 @onready var _audio_controller: Node2D = $AudioController
+@onready var _bgm: AudioStreamPlayer2D = get_node_or_null("/root/Bgm")
 
 var rng := RandomNumberGenerator.new()
 
@@ -35,6 +36,7 @@ func _ready() -> void:
 		var tw := create_tween()
 		tw.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tw.tween_property(_score_label, "modulate:a", 1.0, 30.0)
+	
 
 func new_game() -> void:
 	speed = START_SPEED
@@ -115,8 +117,18 @@ func event_speed_bumb() -> void:
 func event_argument() -> void:
 	$Camera2D.screen_shake(5)
 	$Camera2D.reset_camera(1)
+
+	if _bgm and _bgm.playing:
+		_bgm.stream_paused = true
+
 	await _audio_controller.play_argument_and_wait()
-	$Camera2D.zoom_to_target(10)
+
+	if _bgm:
+		_bgm.stream_paused = false
+	
+	if !is_game_over:
+		$Camera2D.zoom_to_target(10)
+
 
 func event_bridge() -> void:
 	$AnimBridge.anim()
