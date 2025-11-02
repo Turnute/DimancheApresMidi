@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c6t34fp2ramdu"]
 
-[ext_resource type="Texture2D" uid="uid://8myt2yj1oe1q" path="res://icon.svg" id="1_7ukg5"]
 [ext_resource type="Script" uid="uid://b4ldo471dr4sx" path="res://scripts/obstacle.gd" id="1_drdry"]
+[ext_resource type="Texture2D" uid="uid://5qq705m6pp06" path="res://assets/obstacle/batiment_01.png" id="2_drdry"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_drdry"]
 size = Vector2(16.01747, 15.9188795)
@@ -13,8 +13,8 @@ collision_mask = 12
 script = ExtResource("1_drdry")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.14519373, 0.14761218)
-texture = ExtResource("1_7ukg5")
+scale = Vector2(0.06496196, 0.06604402)
+texture = ExtResource("2_drdry")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.99999976, 1)
@@ -23,6 +23,9 @@ shape = SubResource("RectangleShape2D_drdry")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 4.0
 autostart = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-3.008734, -10.851278, 0, -10.851278, 2.0058227, -10.851278, 4.0116453, -10.851278, 5.014557, -15.783677, 23.066961, -15.783677, 23.066961, -9.864799, 37.10772, -9.864799, 37.10772, 14.797197, -34.098984, 14.797197, -34.098984, 1.9729596, -34.098984, -14.797197, -22.064049, -9.864799, -11.032024, -10.851278)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

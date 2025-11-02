@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnvveye22h04a"]
+
+[ext_resource type="Script" uid="uid://b4ldo471dr4sx" path="res://scripts/obstacle.gd" id="1_4ydhb"]
+[ext_resource type="Texture2D" uid="uid://cman4kwqxea2r" path="res://assets/obstacle/chien_3.png" id="2_4ydhb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drdry"]
+size = Vector2(6.0174694, 7.891839)
+
+[node name="Obstacle" type="Area2D"]
+scale = Vector2(0.9970971, 1.0137055)
+collision_layer = 8
+collision_mask = 12
+script = ExtResource("1_4ydhb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3.8146973e-06, 0)
+scale = Vector2(0.008656221, 0.008800406)
+texture = ExtResource("2_4ydhb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.3519512e-07)
+scale = Vector2(0.99999946, 1)
+shape = SubResource("RectangleShape2D_drdry")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

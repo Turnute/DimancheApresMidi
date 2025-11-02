@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://d05sw0r7p3ocn"]
+
+[ext_resource type="Script" uid="uid://b4ldo471dr4sx" path="res://scripts/obstacle.gd" id="1_ri70b"]
+[ext_resource type="Texture2D" uid="uid://bmeq4j06txcdl" path="res://assets/obstacle/batiment_03.png" id="2_ri70b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drdry"]
+size = Vector2(16.01747, 15.9188795)
+
+[node name="Obstacle" type="Area2D"]
+scale = Vector2(0.9970971, 1.0137055)
+collision_layer = 8
+collision_mask = 12
+script = ExtResource("1_ri70b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.06496196, 0.06604402)
+texture = ExtResource("2_ri70b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.99999976, 1)
+shape = SubResource("RectangleShape2D_drdry")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-8.023291, -10.851278, -7.020379, -12.824238, 1.0029113, -15.783677, 3.008734, -16.770157, 5.014557, -15.783677, 15.04367, -8.878319, 24.069872, 3.9459193, 22.064049, 4.9323993, 22.064049, 16.770157, -10.029114, 16.770157, -13.0378475, 16.770157, -22.064049, 14.797197, -24.069872, 2.9594395, -14.040758, -5.918879)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
