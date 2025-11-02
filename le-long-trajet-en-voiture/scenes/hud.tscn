@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dckd2sv6d4xk0"]
+[gd_scene load_steps=2 format=3 uid="uid://dckd2sv6d4xk0"]
+
+[ext_resource type="PackedScene" uid="uid://cwhysnnor876j" path="res://scenes/joli_panneau.tscn" id="1_ahhtf"]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -11,3 +13,8 @@ theme_override_font_sizes/font_size = 40
 text = "SCORE: "
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="magnifiquePannal" parent="." instance=ExtResource("1_ahhtf")]
+position = Vector2(269.00024, 210.00006)
+scale = Vector2(0.20096746, 0.20096746)
+metadata/_edit_group_ = true

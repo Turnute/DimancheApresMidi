@@ -14,13 +14,17 @@ var _did_swap := false
 @export var background_scroll_speed: float
 
 @onready var _score_label: Label = get_node_or_null("Camera2D/HUD/ScoreLabel")
+@onready var _pannal: Sprite2D = get_node_or_null("Camera2D/HUD/magnifiquePannal")
 @onready var _event_timer: Timer = $EventTimer
 @onready var _end_timer: Timer = $EndTimer
+@onready var _pan_timer: Timer = $PannalTimer
 @onready var _character := get_node_or_null("car/character")
 @onready var _audio_controller: Node2D = $AudioController
 @onready var _bgm: AudioStreamPlayer2D = get_node_or_null("/root/Bgm")
 
 var rng := RandomNumberGenerator.new()
+
+var ev : int = -1
 
 var home: PackedScene = preload("res://scenes/start.tscn")
 var game_over_timer : float = 6.0
@@ -71,16 +75,9 @@ func get_speed() -> float:
 func _on_event_timer_timeout() -> void:
 	_event_timer.wait_time = rng.randf_range(25.0, 40.0)
 	print(_event_timer.wait_time)
-	var ev: int = rng.randi_range(0,2)
-	match ev:
-		0:
-			event_speed_bumb()
-		1:
-			event_argument()
-		2:
-			event_bridge()
-		_:
-			pass
+	ev = rng.randi_range(0,2)
+	_pan_timer.start()
+	_pannal.show_pannal(ev)
 
 func game_over() -> void:
 	if is_game_over:
@@ -131,3 +128,20 @@ func event_argument() -> void:
 
 func event_bridge() -> void:
 	$AnimBridge.anim()
+
+func _on_pannal_timer_timeout() -> void:
+	_pannal.unload()
+	_pan_timer.stop()
+	_event_load()
+
+func _event_load() -> void:
+	match ev:
+		0:
+			event_speed_bumb()
+		1:
+			event_argument()
+		2:
+			event_bridge()
+		-1:
+			pass
+	

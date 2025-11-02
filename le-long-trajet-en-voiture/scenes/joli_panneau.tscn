@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwhysnnor876j"]
+
+[ext_resource type="Script" uid="uid://dan32n82egbt0" path="res://scripts/joli_panneau.gd" id="1_qjxbo"]
+[ext_resource type="Texture2D" uid="uid://bc1ecrqk43nel" path="res://assets/panneau/pannal1.png" id="2_q4g5m"]
+
+[node name="magnifique pannal" type="Sprite2D"]
+texture = ExtResource("2_q4g5m")
+script = ExtResource("1_qjxbo")

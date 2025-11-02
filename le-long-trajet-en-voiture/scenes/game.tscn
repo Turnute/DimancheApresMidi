@@ -52,8 +52,11 @@ _data = {
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lbhrr")
 
+[node name="PannalTimer" type="Timer" parent="."]
+wait_time = 2.0
+
 [node name="EventTimer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 5.0
 autostart = true
 
 [node name="EndTimer" type="Timer" parent="."]
@@ -142,6 +145,7 @@ script = ExtResource("12_dinhu")
 
 [node name="SFXPlayer2" type="AudioStreamPlayer2D" parent="AudioController"]
 
+[connection signal="timeout" from="PannalTimer" to="." method="_on_pannal_timer_timeout"]
 [connection signal="timeout" from="EventTimer" to="." method="_on_event_timer_timeout"]
 [connection signal="timeout" from="EndTimer" to="." method="_on_end_timer_timeout"]
 [connection signal="timeout" from="ObstacleSpawner/SpawnTimer" to="ObstacleSpawner" method="_on_spawn_timer_timeout"]
