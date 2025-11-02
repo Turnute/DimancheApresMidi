@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dx3gelckvfhuq"]
+[gd_scene load_steps=16 format=3 uid="uid://dx3gelckvfhuq"]
 
 [ext_resource type="Script" uid="uid://c2vehuhv44psj" path="res://scripts/main.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://6q8fxhyt5cab" path="res://scenes/player.tscn" id="1_uwrxv"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://cysdywg71en8t" path="res://scripts/camera.gd" id="9_0tnpc"]
 [ext_resource type="Script" uid="uid://c4wc4mp5eaf60" path="res://scripts/character.gd" id="9_vtaks"]
 [ext_resource type="PackedScene" uid="uid://dckd2sv6d4xk0" path="res://scenes/hud.tscn" id="11_kvpfn"]
+[ext_resource type="Script" uid="uid://bneycx80q6s8v" path="res://scripts/game_sfx_controller.gd" id="12_dinhu"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]
 
@@ -120,12 +121,19 @@ libraries = {
 }
 
 [node name="Over" type="ColorRect" parent="GameOver"]
-offset_left = -214.0
-offset_top = -209.0
-offset_right = -174.0
-offset_bottom = -169.0
+offset_left = -251.00003
+offset_top = -231.0
+offset_right = -204.43549
+offset_bottom = -184.34578
 scale = Vector2(10.815694, 6.2588105)
 color = Color(0, 0, 0, 0)
+
+[node name="AudioController" type="Node2D" parent="."]
+script = ExtResource("12_dinhu")
+
+[node name="SFXPlayer1" type="AudioStreamPlayer2D" parent="AudioController"]
+
+[node name="SFXPlayer2" type="AudioStreamPlayer2D" parent="AudioController"]
 
 [connection signal="timeout" from="EventTimer" to="." method="_on_event_timer_timeout"]
 [connection signal="timeout" from="EndTimer" to="." method="_on_end_timer_timeout"]

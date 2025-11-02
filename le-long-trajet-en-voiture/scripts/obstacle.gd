@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var s := _get_speed()
-	position.x -= s * delta
+	position.x -= s * delta * 3
 
 func _on_body_entered(body: Node2D) -> void:
 	queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://yxl47raevwjf"]
+[gd_scene load_steps=12 format=3 uid="uid://yxl47raevwjf"]
 
 [ext_resource type="Script" uid="uid://ccjlshqr67krs" path="res://scripts/start.gd" id="1_8itgj"]
 [ext_resource type="PackedScene" uid="uid://cywngdy61mdvn" path="res://scenes/loopable_background.tscn" id="2_tn317"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bf4o5rabv8a4g" path="res://assets/car/car_background.png" id="5_1nvso"]
 [ext_resource type="Texture2D" uid="uid://d4ihhosb0isdp" path="res://assets/car/character/char1.png" id="6_gsp51"]
 [ext_resource type="Script" uid="uid://c4wc4mp5eaf60" path="res://scripts/character.gd" id="7_r8uic"]
+[ext_resource type="AudioStream" uid="uid://ctqdcghsmcghq" path="res://assets/sfx/bip.wav" id="8_8itgj"]
 [ext_resource type="Texture2D" uid="uid://dbk0cofrlvtwa" path="res://assets/press_00.png" id="8_x1pfr"]
 
 [sub_resource type="Animation" id="Animation_ka6nf"]
@@ -122,6 +123,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5
+
+[node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_8itgj")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="AnimationPlayer/Button" to="." method="_on_button_pressed"]

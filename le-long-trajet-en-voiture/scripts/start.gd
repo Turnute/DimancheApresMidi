@@ -1,31 +1,34 @@
 extends Node2D
 
-var speed : float = 100.0
+var speed: float = 100.0
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-@onready var animation_player = $AnimationPlayer
-var jeu = preload("res://scenes/game.tscn")
+const GAME_PATH := "res://scenes/game.tscn"  # <- chemin, pas de preload
 
 func _ready() -> void:
-	$Timer.stop()                    # sécurité
-	$Timer.one_shot = true           # optionnel
-	print("START READY")             # debug: check que tu vois bien ça
+	$Timer.stop()
+	$Timer.one_shot = true
 
-func _on_button_pressed():
+func _on_button_pressed() -> void:
 	start()
 
-func _on_timer_timeout() -> void:
-	get_tree().change_scene_to_packed(jeu)
-
-func _process(delta: float) -> void:
-	# Handle jump.
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		start()
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
-		
-func start() -> void :
+
+func start() -> void:
+	$SFXPlayer.play()
 	animation_player.play("startfade")
 	$Timer.start()
+
+func _on_timer_timeout() -> void:
+	# évite tout conflit de chargement pendant les callbacks
+	call_deferred("_go_to_game")
+
+func _go_to_game() -> void:
+	get_tree().change_scene_to_file(GAME_PATH)
 
 func get_speed() -> float:
 	return speed

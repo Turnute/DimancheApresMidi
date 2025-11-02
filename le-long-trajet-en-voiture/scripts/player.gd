@@ -4,8 +4,13 @@ extends CharacterBody2D
 @export var JUMP_VELOCITY: float = -300.0
 @export var max_jumps: int = 2
 
+var _game: Node
+
 var jump_count: int = 0
 @onready var gravity: float = float(ProjectSettings.get_setting("physics/2d/default_gravity"))
+
+func _ready() -> void:
+	_game = get_parent()
 
 func _physics_process(delta: float) -> void:
 	# Gravité
@@ -32,6 +37,7 @@ func jump(vel: float) -> void:
 		animated_sprite.play("jump")
 	velocity.y = vel
 	jump_count += 1
+	_game.play_jump()
 
 func die() -> void:
 	if animated_sprite:

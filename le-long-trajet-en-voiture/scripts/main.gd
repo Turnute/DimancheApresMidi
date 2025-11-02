@@ -17,6 +17,7 @@ var _did_swap := false
 @onready var _event_timer: Timer = $EventTimer
 @onready var _end_timer: Timer = $EndTimer
 @onready var _character := get_node_or_null("car/character")
+@onready var _audio_controller: Node2D = $AudioController
 
 var rng := RandomNumberGenerator.new()
 
@@ -87,6 +88,7 @@ func game_over() -> void:
 	$Camera2D.screen_shake(12)
 	$Camera2D.reset_camera(game_over_timer)
 	$Player.die()
+	_audio_controller._play_death()
 
 	if _end_timer:
 		_end_timer.one_shot = true
@@ -94,5 +96,8 @@ func game_over() -> void:
 		await _end_timer.timeout
 		print("await OK")
 
-	var err := get_tree().change_scene_to_file(HOME_PATH)
-	print("change_scene_to_file(HOME_PATH) -> ", err)
+	get_tree().change_scene_to_file(HOME_PATH)
+
+func play_jump() -> void:
+	_audio_controller._play_jump()
+	$Camera2D.screen_shake(1)
