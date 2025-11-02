@@ -5,27 +5,27 @@
 [ext_resource type="Texture2D" uid="uid://dh4510ofv76oi" path="res://assets/obstacle/oiseaux.png" id="3_uvnn1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5jyjt"]
-radius = 2.0058231
+radius = 2.863783
 
 [node name="Obstacle" type="Area2D"]
-scale = Vector2(0.9970971, 1.0137055)
+scale = Vector2(2, 2.034)
 collision_layer = 8
 collision_mask = 12
 script = ExtResource("1_g2k6e")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(1.0029113, 3.9459193)
+position = Vector2(-1.1471415, -3.4145794)
 rotation = -0.23736478
-scale = Vector2(0.013821026, 0.014051241)
+scale = Vector2(0.013821026, 0.02855913)
 texture = ExtResource("2_ydhev")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-9.536743e-07, 0)
-scale = Vector2(0.013821029, 0.014051241)
+position = Vector2(-3.235794, -11.939318)
+scale = Vector2(0.025, 0.025)
 texture = ExtResource("3_uvnn1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.9864798)
+position = Vector2(-3.235793, -10.952837)
 scale = Vector2(0.99999976, 1)
 shape = SubResource("CircleShape2D_5jyjt")
 

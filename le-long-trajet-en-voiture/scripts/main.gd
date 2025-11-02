@@ -35,8 +35,7 @@ func _ready() -> void:
 		_score_label.modulate.a = 0.0
 		var tw := create_tween()
 		tw.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		tw.tween_property(_score_label, "modulate:a", 1.0, 30.0)
-	
+		tw.tween_property(_score_label, "modulate:a", 1.0, 30.0)	
 
 func new_game() -> void:
 	speed = START_SPEED
@@ -110,9 +109,10 @@ func play_jump() -> void:
 	$Camera2D.screen_shake(1)
 
 func event_speed_bumb() -> void:
-	$Player.jump(-800)
-	$Camera2D.screen_shake(10)
-	_audio_controller._play_bump()
+	if !is_game_over:
+		$Player.jump(-800)
+		$Camera2D.screen_shake(10)
+		_audio_controller._play_bump()
 
 func event_argument() -> void:
 	$Camera2D.screen_shake(5)
@@ -128,7 +128,6 @@ func event_argument() -> void:
 	
 	if !is_game_over:
 		$Camera2D.zoom_to_target(10)
-
 
 func event_bridge() -> void:
 	$AnimBridge.anim()

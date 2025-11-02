@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://btlw5xc15h1ae"]
+
+[ext_resource type="Script" uid="uid://b4ldo471dr4sx" path="res://scripts/obstacle.gd" id="1_bjfc0"]
+[ext_resource type="Texture2D" uid="uid://bycn2nxq3ncou" path="res://assets/obstacle/arbre_obstruction-3.png" id="2_2a8w7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drdry"]
+size = Vector2(3.0087352, 18.776917)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n2vh7"]
+radius = 25.092207
+
+[node name="Obstacle" type="Area2D"]
+position = Vector2(5, 18.999998)
+scale = Vector2(0.75, 0.763)
+collision_layer = 8
+collision_mask = 12
+script = ExtResource("1_bjfc0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-6.017468, -21.702557)
+scale = Vector2(0.06496196, 0.06604402)
+texture = ExtResource("2_2a8w7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6.0174665, -1.4628196)
+scale = Vector2(0.9999995, 1)
+shape = SubResource("RectangleShape2D_drdry")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-7.0203795, -23.675514)
+scale = Vector2(0.9999991, 1)
+shape = SubResource("CircleShape2D_n2vh7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,25 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqdvpnofvo81v"]
+[gd_scene load_steps=4 format=3 uid="uid://cwyjx5masime1"]
 
-[ext_resource type="Script" uid="uid://b4ldo471dr4sx" path="res://scripts/obstacle.gd" id="1_bjfc0"]
-[ext_resource type="Texture2D" uid="uid://b61oq1rlyvnk1" path="res://assets/obstacle/panneau_01.png" id="2_bjfc0"]
+[ext_resource type="Script" uid="uid://b4ldo471dr4sx" path="res://scripts/obstacle.gd" id="1_uavvn"]
+[ext_resource type="Texture2D" uid="uid://34f4427m354a" path="res://assets/obstacle/bulle2.png" id="2_gq4dg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_drdry"]
-size = Vector2(15.043677, 27.621437)
+size = Vector2(45.131027, 15.9188795)
 
 [node name="Obstacle" type="Area2D"]
 scale = Vector2(0.9970971, 1.0137055)
 collision_layer = 8
 collision_mask = 12
-script = ExtResource("1_bjfc0")
+script = ExtResource("1_uavvn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-2.3841858e-07, 0)
-scale = Vector2(0.111281164, 0.11313474)
-texture = ExtResource("2_bjfc0")
+scale = Vector2(0.06496196, 0.06604402)
+texture = ExtResource("2_gq4dg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5014564, -1.1759756e-06)
-scale = Vector2(0.9999994, 1)
+position = Vector2(0.5014551, 0)
+scale = Vector2(0.99999964, 1)
 shape = SubResource("RectangleShape2D_drdry")
 
 [node name="Timer" type="Timer" parent="."]

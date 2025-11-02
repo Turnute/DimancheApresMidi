@@ -1,23 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://cde5twyor5ud7"]
+[gd_scene load_steps=4 format=3 uid="uid://cd3jufoyo3c70"]
 
-[ext_resource type="Script" uid="uid://b4ldo471dr4sx" path="res://scripts/obstacle.gd" id="1_63vwd"]
-[ext_resource type="Texture2D" uid="uid://dnfjw8hhf6whn" path="res://assets/obstacle/panneau_00.png" id="2_63vwd"]
+[ext_resource type="Script" uid="uid://b4ldo471dr4sx" path="res://scripts/obstacle.gd" id="1_4rvrh"]
+[ext_resource type="Texture2D" uid="uid://bg5mbirvcg1kh" path="res://assets/obstacle/chien_2.png" id="2_4rvrh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_drdry"]
-size = Vector2(6.0174704, 20.716076)
+size = Vector2(6.0174694, 9.864799)
 
 [node name="Obstacle" type="Area2D"]
-scale = Vector2(0.9970971, 1.0137055)
+position = Vector2(0, 5)
+scale = Vector2(2, 2.034)
 collision_layer = 8
 collision_mask = 12
-script = ExtResource("1_63vwd")
+script = ExtResource("1_4rvrh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.06496196, 0.06604402)
-texture = ExtResource("2_63vwd")
+position = Vector2(0, -2.3841858e-07)
+scale = Vector2(0.011783108, 0.011979376)
+texture = ExtResource("2_4rvrh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4.7822533e-07, -0.4932401)
+position = Vector2(2.391126e-07, 0)
 scale = Vector2(0.9999995, 1)
 shape = SubResource("RectangleShape2D_drdry")
 
