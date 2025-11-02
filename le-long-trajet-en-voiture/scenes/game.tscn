@@ -53,7 +53,7 @@ _data = {
 script = ExtResource("1_lbhrr")
 
 [node name="EventTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 30.0
 autostart = true
 
 [node name="EndTimer" type="Timer" parent="."]
