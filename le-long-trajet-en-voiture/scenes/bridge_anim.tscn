@@ -1,33 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bfiqkbnrj3v2h"]
 
+[ext_resource type="Script" uid="uid://c400o4rrjotme" path="res://scripts/bridge_anim.gd" id="1_teg1w"]
 [ext_resource type="Texture2D" uid="uid://xavqalohecwr" path="res://assets/events/bridge.png" id="1_wyudv"]
-
-[sub_resource type="Animation" id="Animation_bugwq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0.39215687)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationPlayer/Sprite2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(899.00006, 4)]
-}
 
 [sub_resource type="Animation" id="Animation_drcax"]
 resource_name = "debuttunnel"
@@ -54,35 +28,19 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 5.5, 7.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(899, -9), Vector2(-242.06833, -9.000001), Vector2(-730, -9)]
+"values": [Vector2(891.00006, -145), Vector2(-242.068, -145), Vector2(-730, -145)]
 }
-
-[sub_resource type="Animation" id="Animation_8kqdj"]
-resource_name = "debutunnel"
-length = 8.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationPlayer/Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 6.99),
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/ColorRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 7.95),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(899.00006, 4), Vector2(-669.99994, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationPlayer/ColorRect:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2, 7.03),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_v2wp5"]
@@ -133,33 +91,61 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 0.39215687), Color(0, 0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_teg1w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(891.00006, -145)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_42jx5"]
 _data = {
-&"RESET": SubResource("Animation_bugwq"),
+&"RESET": SubResource("Animation_teg1w"),
 &"debuttunnel": SubResource("Animation_drcax"),
-&"debutunnel": SubResource("Animation_8kqdj"),
 &"fintunnel": SubResource("Animation_v2wp5"),
 &"over": SubResource("Animation_42jx5"),
 &"start": SubResource("Animation_f8lsp")
 }
 
 [node name="AnimBridge" type="Node2D"]
+script = ExtResource("1_teg1w")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_42jx5")
 }
+speed_scale = 4.0
 
 [node name="ColorRect" type="ColorRect" parent="AnimationPlayer"]
-offset_left = -487.0
-offset_top = -188.0
-offset_right = 164.0
-offset_bottom = 169.0
+offset_left = -489.0
+offset_top = -333.0
+offset_right = 162.0
+offset_bottom = 24.0
 scale = Vector2(1.4975882, 1.0400006)
-color = Color(0, 0, 0, 0.39215687)
+color = Color(0, 0, 0, 0)
 metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimationPlayer"]
-position = Vector2(899.00006, 4)
+position = Vector2(891.00006, -145)
 scale = Vector2(0.34814814, 0.34814814)
 texture = ExtResource("1_wyudv")
