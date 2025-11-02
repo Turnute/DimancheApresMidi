@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dx3gelckvfhuq"]
+[gd_scene load_steps=17 format=3 uid="uid://dx3gelckvfhuq"]
 
 [ext_resource type="Script" uid="uid://c2vehuhv44psj" path="res://scripts/main.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://6q8fxhyt5cab" path="res://scenes/player.tscn" id="1_uwrxv"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://c4wc4mp5eaf60" path="res://scripts/character.gd" id="9_vtaks"]
 [ext_resource type="PackedScene" uid="uid://dckd2sv6d4xk0" path="res://scenes/hud.tscn" id="11_kvpfn"]
 [ext_resource type="Script" uid="uid://bneycx80q6s8v" path="res://scripts/game_sfx_controller.gd" id="12_dinhu"]
+[ext_resource type="PackedScene" uid="uid://bfiqkbnrj3v2h" path="res://scenes/bridge_anim.tscn" id="13_kvuet"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]
 
@@ -58,11 +59,13 @@ autostart = true
 [node name="EndTimer" type="Timer" parent="."]
 
 [node name="Loopable_Background" parent="." instance=ExtResource("2_p57ef")]
+visibility_layer = 2
 position = Vector2(174, -125)
 scale = Vector2(0.175, 0.175)
 speed_ref = NodePath("..")
 
 [node name="Loopable_Ground" parent="." instance=ExtResource("3_p57ef")]
+visibility_layer = 2
 position = Vector2(149, -109)
 scale = Vector2(0.15, 0.15)
 speed_ref = NodePath("..")
@@ -73,6 +76,8 @@ scale = Vector2(1, 0.992)
 collision_layer = 4
 collision_mask = 10
 script = ExtResource("2_yqjtg")
+
+[node name="AnimBridge" parent="." instance=ExtResource("13_kvuet")]
 
 [node name="LE SOL" type="StaticBody2D" parent="."]
 position = Vector2(10, -67)
@@ -93,12 +98,14 @@ wait_time = 2.0
 position = Vector2(166, -8)
 
 [node name="car" type="Sprite2D" parent="."]
+top_level = true
+visibility_layer = 2
 position = Vector2(2, -86)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("7_u5sy4")
 
 [node name="character" type="Sprite2D" parent="car"]
-position = Vector2(-128, 16)
+position = Vector2(-128, 22)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("8_gee14")
 script = ExtResource("9_vtaks")

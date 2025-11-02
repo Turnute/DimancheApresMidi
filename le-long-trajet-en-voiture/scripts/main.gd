@@ -21,6 +21,9 @@ var _did_swap := false
 
 var rng := RandomNumberGenerator.new()
 
+var home: PackedScene = preload("res://scenes/start.tscn")
+var game_over_timer : float = 6.0
+
 func _ready() -> void:
 	rng.randomize()
 	new_game()
@@ -32,7 +35,6 @@ func _ready() -> void:
 		var tw := create_tween()
 		tw.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tw.tween_property(_score_label, "modulate:a", 1.0, 30.0)
-
 
 func new_game() -> void:
 	speed = START_SPEED
@@ -50,6 +52,10 @@ func _process(delta: float) -> void:
 		if is_instance_valid(_character) and _character.has_method("swap_textures"):
 			_character.swap_textures()
 			_did_swap = true
+	
+	if speed < MAX_SPEED:
+		speed += 0.5 * delta
+		#print(speed)
 
 func show_score() -> void:
 	if _score_label:
@@ -62,18 +68,18 @@ func get_speed() -> float:
 	return speed
 
 func _on_event_timer_timeout() -> void:
-	if _event_timer:
-		_event_timer.wait_time = rng.randf_range(20.0, 40.0)
-	var ev: int = rng.randi_range(0, 0) # pour l'instant : toujours 0
+	_event_timer.wait_time = rng.randf_range(25.0, 40.0)
+	print(_event_timer.wait_time)
+	var ev: int = rng.randi_range(0,2)
 	match ev:
 		0:
-			# Event Pont
-			pass
+			event_speed_bumb()
+		1:
+			event_argument()
+		2:
+			event_bridge()
 		_:
 			pass
-
-var home: PackedScene = preload("res://scenes/start.tscn")
-var game_over_timer : float = 6.0
 
 func game_over() -> void:
 	if is_game_over:
@@ -94,10 +100,23 @@ func game_over() -> void:
 		_end_timer.one_shot = true
 		_end_timer.start(game_over_timer)
 		await _end_timer.timeout
-		print("await OK")
 
 	get_tree().change_scene_to_file(HOME_PATH)
 
 func play_jump() -> void:
 	_audio_controller._play_jump()
 	$Camera2D.screen_shake(1)
+
+func event_speed_bumb() -> void:
+	$Player.jump(-800)
+	$Camera2D.screen_shake(10)
+	_audio_controller._play_bump()
+
+func event_argument() -> void:
+	$Camera2D.screen_shake(5)
+	$Camera2D.reset_camera(1)
+	await _audio_controller.play_argument_and_wait()
+	$Camera2D.zoom_to_target(10)
+
+func event_bridge() -> void:
+	$AnimBridge.anim()
